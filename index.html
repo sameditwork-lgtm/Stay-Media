@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Start your edit — Staymedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --warm:#0A0708;--coal:#16100F;--panel:#1D1514;--line:#2A201E;--line2:#3A2C29;
+  --ember:#FF4D2E;--flare:#FF8A3D;--wine:#8C2012;--bone:#F6F1EC;--ash:#9A8F8A;--ash2:#6E635F;
+  --ok:#55B57A;
+  box-sizing:border-box;color-scheme:dark;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+:root[data-theme="light"]{color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--warm);color:var(--bone);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(60% 50% at 85% 100%,rgba(255,77,46,.18),transparent 70%);pointer-events:none}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+.shell{position:relative;display:grid;grid-template-columns:280px 1fr;min-height:100%;max-width:1240px;margin:0 auto}
+/* sidebar */
+.side{padding:36px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:36px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:40px;height:40px;flex:none}
+.brand b{font-weight:700;font-size:22px;letter-spacing:-.03em}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.steps li{position:relative;display:flex;align-items:center;gap:14px;padding:11px 0;color:var(--ash2);font-size:15px;cursor:default}
+.steps li .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line2);display:grid;place-items:center;flex:none;background:var(--warm);font-size:11px;font-weight:600;color:var(--ash2)}
+.steps li+li::before{content:"";position:absolute;left:10px;top:-11px;height:22px;width:2px;background:var(--line)}
+.steps li.done{color:var(--ash);cursor:pointer}
+.steps li.done .dot{border-color:var(--ember);background:var(--ember);color:var(--warm)}
+.steps li.done+li::before{background:var(--ember)}
+.steps li.now{color:var(--bone);font-weight:600}
+.steps li.now .dot{border-color:var(--ember);color:var(--ember)}
+.side .foot{margin-top:auto;font-size:13px;color:var(--ash);line-height:1.6}
+.side .foot a{color:var(--bone);text-decoration:none}
+/* main */
+.main{padding:40px 48px 120px;min-width:0}
+h1{font-size:34px;line-height:1.1;letter-spacing:-.03em;font-weight:700;margin:0 0 8px}
+.lede{color:var(--ash);margin:0 0 28px;max-width:60ch}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.card{position:relative;text-align:left;background:var(--coal);border:1px solid var(--line);border-radius:16px;padding:20px;cursor:pointer;transition:border-color .15s,background .15s;display:flex;flex-direction:column;gap:6px}
+.card:hover{border-color:var(--line2);background:var(--panel)}
+.card:focus-visible,.row:focus-visible,.pill:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--flare);outline-offset:2px}
+.card.on{border-color:var(--ember);background:linear-gradient(180deg,rgba(255,77,46,.10),rgba(255,77,46,.03))}
+.card .ico{width:44px;height:44px;border-radius:12px;background:var(--panel);display:grid;place-items:center;margin-bottom:8px;color:var(--flare)}
+.card.on .ico{background:rgba(255,77,46,.18)}
+.card .ico svg{width:24px;height:24px}
+.card h3{margin:0;font-size:17px;font-weight:600}
+.card p{margin:0;color:var(--ash);font-size:14px;line-height:1.5}
+.card .tick{position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:50%;border:2px solid var(--line2)}
+.card.on .tick{border-color:var(--ember);background:var(--ember)}
+.card.on .tick::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid var(--warm);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.row{display:flex;align-items:center;gap:18px;text-align:left;width:100%;background:var(--coal);border:1px solid var(--line);border-radius:16px;padding:20px 22px;cursor:pointer}
+.row:hover{border-color:var(--line2)}
+a.row{text-decoration:none}
+.row .ico{width:44px;height:44px;border-radius:50%;background:rgba(255,77,46,.14);display:grid;place-items:center;color:var(--ember);flex:none}
+.row .ico svg{width:22px;height:22px}
+.row h3{margin:0;font-size:17px;font-weight:600}.row p{margin:2px 0 0;color:var(--ash);font-size:14px}
+.row .arr{margin-left:auto;color:var(--ember)}
+label.f{display:block;margin:0 0 18px}
+label.f>span{display:block;font-size:14px;font-weight:600;color:var(--bone);margin-bottom:8px}
+label.f>span small{font-weight:400;color:var(--ash2)}
+input[type=text],input[type=url],input[type=email],input[type=tel],input[type=date],select,textarea{width:100%;background:var(--coal);border:1px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--bone)}
+input::placeholder,textarea::placeholder{color:var(--ash2)}
+textarea{min-height:110px;resize:vertical}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ash) 50%),linear-gradient(135deg,var(--ash) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+input:focus,select:focus,textarea:focus{border-color:var(--ember);outline:none}
+.hint{font-size:14px;color:var(--flare);margin:-8px 0 18px}
+.note{display:flex;gap:10px;align-items:flex-start;border:1px dashed var(--line2);border-radius:12px;padding:12px 14px;color:var(--ash);font-size:14px;margin-top:18px}
+.note svg{flex:none;width:18px;height:18px;color:var(--flare);margin-top:2px}
+.sub{font-size:14px;font-weight:600;margin:26px 0 10px}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{border:1px solid var(--line2);background:var(--coal);border-radius:999px;padding:9px 16px;font-size:14px;cursor:pointer}
+.pill.on{border-color:var(--ember);background:rgba(255,77,46,.14);color:var(--bone)}
+.inc{color:var(--ash);font-size:14px;margin:0 0 20px}
+.inc b{color:var(--bone);font-weight:600}
+/* nav */
+.nav{position:sticky;bottom:0;margin:40px -48px -120px;padding:18px 48px calc(18px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(10,7,8,0),var(--warm) 30%)}
+.btn{border:0;border-radius:999px;text-decoration:none;padding:14px 26px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn.p{background:var(--ember);color:#1a0b06}
+.btn.p:hover{background:var(--flare)}
+.btn.p:disabled{background:var(--line2);color:var(--ash2);cursor:not-allowed}
+.btn.g{background:transparent;color:var(--ash)}
+.btn.g:hover{color:var(--bone)}
+.btn.o{background:var(--coal);border:1px solid var(--line2);color:var(--bone)}
+.btn.o:hover{border-color:var(--ember)}
+.btn svg{width:18px;height:18px}
+/* review */
+.rev{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--coal)}
+.rev .r{display:grid;grid-template-columns:180px 1fr auto;gap:16px;padding:14px 20px;border-top:1px solid var(--line);font-size:15px}
+.rev .r:first-child{border-top:0}
+.rev .k{color:var(--ash)}
+.rev .v{white-space:pre-wrap;word-break:break-word}
+.rev .e{color:var(--ember);background:none;border:0;cursor:pointer;font-size:14px;padding:0}
+.send{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--bone);color:var(--warm);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:.2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.mob{display:none}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .side{display:none}
+  .mob{display:block;position:sticky;top:0;z-index:5;background:var(--warm);border-bottom:1px solid var(--line);padding:calc(14px + env(safe-area-inset-top,0px)) 20px 12px}
+  body::after{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--warm);z-index:10}
+  .mob .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .mob .brand svg{width:30px;height:30px}.mob .brand b{font-size:18px}
+  .mob .cnt{font-size:13px;color:var(--ash)}
+  .mob .bar{height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+  .mob .bar i{display:block;height:100%;background:var(--ember);transition:width .3s}
+  .main{padding:28px 20px 120px}
+  h1{font-size:28px}
+  .g2,.g3{grid-template-columns:1fr}
+  .nav{margin:40px -20px -120px;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px))}
+  .rev .r{grid-template-columns:1fr;gap:4px}
+  .rev .e{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="top" gradientUnits="userSpaceOnUse" x1="74" y1="18" x2="48" y2="50"><stop offset="0" stop-color="#FFA75C"/><stop offset=".45" stop-color="#FF8A3D"/><stop offset=".8" stop-color="#FF4D2E"/><stop offset="1" stop-color="#C8321A"/></linearGradient>
+    <linearGradient id="bot" gradientUnits="userSpaceOnUse" x1="26" y1="82" x2="52" y2="50"><stop offset="0" stop-color="#FFA75C"/><stop offset=".45" stop-color="#FF8A3D"/><stop offset=".8" stop-color="#FF4D2E"/><stop offset="1" stop-color="#C8321A"/></linearGradient>
+    <linearGradient id="foldT" gradientUnits="userSpaceOnUse" x1="34" y1="34" x2="46" y2="22"><stop offset="0" stop-color="#8C2012" stop-opacity=".6"/><stop offset="1" stop-color="#8C2012" stop-opacity="0"/></linearGradient>
+    <linearGradient id="foldB" gradientUnits="userSpaceOnUse" x1="66" y1="66" x2="54" y2="78"><stop offset="0" stop-color="#8C2012" stop-opacity=".6"/><stop offset="1" stop-color="#8C2012" stop-opacity="0"/></linearGradient>
+    <radialGradient id="lens" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#F6F1EC"/><stop offset="1" stop-color="#E4D9D0"/></radialGradient>
+    <linearGradient id="tri" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A3D"/><stop offset="1" stop-color="#FF4D2E"/></linearGradient>
+    <symbol id="mark" viewBox="0 0 100 100">
+      <path d="M26 82 L66 66 L50 50" fill="none" stroke="url(#bot)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M66 66 L50 50" fill="none" stroke="url(#foldB)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34 34 L50 50" fill="none" stroke="#8C2012" stroke-width="32" stroke-linecap="butt" opacity=".22" transform="translate(1.5,2.5)"/>
+      <path d="M74 18 L34 34 L50 50" fill="none" stroke="url(#top)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34 34 L50 50" fill="none" stroke="url(#foldT)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="50" cy="50" r="12.3" fill="#0A0708" opacity=".9"/><circle cx="50" cy="50" r="10.5" fill="url(#lens)"/>
+      <polygon points="46.6,44.8 46.6,55.2 55.6,50" fill="url(#tri)" stroke="#FF4D2E" stroke-width="1.6" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="mob">
+  <div class="top">
+    <a class="brand" href="https://stayymedia.com"><svg><use href="#mark"/></svg><b>staymedia</b></a>
+    <span class="cnt" id="mobCnt"></span>
+  </div>
+  <div class="bar"><i id="mobBar"></i></div>
+</div>
+
+<div class="shell">
+  <aside class="side">
+    <a class="brand" href="https://stayymedia.com"><svg><use href="#mark"/></svg><b>staymedia</b></a>
+    <ol class="steps" id="steps"></ol>
+    <div class="foot">Questions while you fill this in?<br><a href="https://wa.me/923154740676">WhatsApp +92 315 474 0676</a><br><a href="mailto:contact@stayymedia.com">contact@stayymedia.com</a></div>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WA = "923154740676", MAIL = "contact@stayymedia.com";
+const STEPS = ["Start","Video type","Footage","Add-ons","Details","Style","Instructions","Footage & contact","Review"];
+const TYPES = [
+ {id:"long",  t:"Long-form video",      d:"Any 16:9 video. YouTube, podcasts, courses, vlogs, faceless channels.", i:"rect"},
+ {id:"short", t:"Short-form vertical",  d:"9:16 under 3 minutes. YouTube Shorts, Instagram Reels, TikTok.", i:"phone"},
+ {id:"square",t:"Square or 4:5",        d:"Instagram feed, LinkedIn and Facebook posts.", i:"square"},
+ {id:"ad",    t:"Ad or product demo",   d:"Paid ads, SaaS demos, explainers, UGC-style ads, testimonials.", i:"bolt"},
+ {id:"mg",    t:"Motion graphics & 3D", d:"Intros, end screens, logo animation, .mogrt templates.", i:"spark"},
+ {id:"thumb", t:"Thumbnail only",       d:"A custom YouTube thumbnail, no video editing.", i:"image"},
+ {id:"other", t:"Something else",       d:"Not sure it fits? Pick this and describe it in the instructions step.", i:"dots"}
+];
+const LEN  = ["Under 15 minutes","15 to 30 minutes","30 to 60 minutes","60 to 90 minutes","90 minutes to 3 hours","More than 3 hours"];
+const SIZE = ["Under 5 GB","5 to 20 GB","20 to 40 GB","40 to 100 GB","More than 100 GB"];
+const SRC  = ["Camera footage","Phone footage","Screen recording","Podcast (multi-camera)","Mixed sources"];
+const FINAL= ["Under 60 seconds","1 to 3 minutes","3 to 8 minutes","8 to 15 minutes","15 to 30 minutes","30 minutes or longer","You decide"];
+const ADDONS = [
+ {id:"captions", t:"Animated captions",        d:"Word-by-word captions in your brand style."},
+ {id:"thumb",    t:"Custom thumbnail",         d:"Designed to match the edit."},
+ {id:"sfx",      t:"Sound design & SFX",       d:"Whooshes, risers and impacts timed to the cut."},
+ {id:"vo",       t:"AI voiceover",             d:"Natural AI narration for faceless or explainer videos."},
+ {id:"cutdowns", t:"3 vertical cut-downs",     d:"Three Shorts or Reels pulled from this video."},
+ {id:"heavy",    t:"Heavy motion graphics",    d:"Animated titles, lower thirds, text and logo reveals, kinetic typography."},
+ {id:"srt",      t:"Subtitle file (.srt)",     d:"For YouTube or client upload."},
+ {id:"rush",     t:"Rush: 24h first draft",    d:"Instead of the usual 48 to 72 hours."}
+];
+const PACE = [{id:"slow",t:"Slow",d:"Breathing room. Interviews, storytelling, courses."},{id:"medium",t:"Medium",d:"Natural rhythm. Most YouTube videos."},{id:"fast",t:"Fast",d:"Tight cuts, pattern interrupts. Shorts and ads."}];
+const TONES = ["Professional","Casual","Funny","Serious","Elegant","Informational","Entertaining","Cinematic","Educational","Inspirational"];
+const CAPS  = ["Clean minimal","Bold word-pop","Karaoke highlight","Match my examples","No captions"];
+const NICHES = ["Talking head","Podcast","Vlog","Course / education","Finance","Real estate","Tech & SaaS","Gaming","Fitness","Travel","Cooking","Faceless / CashCow","Documentary","Business & marketing","Health & medical","Motivation","Comedy","Beauty & fashion","Religion","Interview","Product review","Music","Kids","News & commentary","Automotive","Science"];
+
+const ICONS = {
+ rect:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>',
+ phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10.5 9.5l4 2.5-4 2.5z" fill="currentColor" stroke="none"/></svg>',
+ square:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="12" cy="12" r="3.5"/></svg>',
+ bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2L5 14h6l-1 8 9-13h-6z"/></svg>',
+ spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/><circle cx="12" cy="12" r="2.5"/></svg>',
+ image:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-8 8"/></svg>',
+ dots:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>',
+ plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
+ resume:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/></svg>',
+ chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+ arr:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+ back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>',
+ warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 21h20z"/><path d="M12 10v5M12 18h.01"/></svg>',
+ wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.1.6 2.9.5a2.5 2.5 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.4-.3z"/></svg>',
+ mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+ copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5h10"/></svg>'
+};
+
+const blank = () => ({type:"",len:"",size:"",src:"",addons:[],title:"",niche:"",desc:"",date:"",final:"",pace:"",tones:[],caps:"",instr:"",examples:"",script:"",assets:"",link:"",name:"",email:"",phone:"",contact:"WhatsApp"});
+let o = blank(), step = 0, maxStep = 0, hasDraft = false;
+try{ const d = localStorage.getItem("sm-order"); if(d){ const p = JSON.parse(d); if(p && p.o && p.step>0){ hasDraft = true; o = Object.assign(blank(), p.o); maxStep = p.maxStep||0; } } }catch(e){}
+function save(){ try{ localStorage.setItem("sm-order", JSON.stringify({o,step,maxStep})); }catch(e){} }
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const label = (arr,id) => (arr.find(x=>x.id===id)||{}).t || "";
+const bigFootage = () => LEN.indexOf(o.len)>=3 || SIZE.indexOf(o.size)>=2;
+
+function valid(s){
+  switch(s){
+    case 1: return !!o.type;
+    case 2: return o.type==="thumb"||o.type==="mg" ? true : !!(o.len && o.size && o.src);
+    case 4: return !!(o.title.trim() && o.niche.trim() && o.desc.trim() && o.final);
+    case 5: return !!(o.pace && o.tones.length);
+    case 6: return o.instr.trim().length>=10;
+    case 7: return !!(o.name.trim() && o.email.trim() && (o.link.trim() || o.type==="mg" || o.type==="thumb"));
+    default: return true;
+  }
+}
+
+function head(t,l){ return `<h1>${t}</h1><p class="lede">${l}</p>`; }
+function field(k,lbl,ph,type="text",extra=""){ return `<label class="f"><span>${lbl}</span><input type="${type}" data-k="${k}" value="${esc(o[k])}" placeholder="${ph}" ${extra}></label>`; }
+function area(k,lbl,ph,sm=""){ return `<label class="f"><span>${lbl} ${sm?`<small>${sm}</small>`:""}</span><textarea data-k="${k}" placeholder="${ph}">${esc(o[k])}</textarea></label>`; }
+function sel(k,lbl,opts,ph){ return `<label class="f"><span>${lbl}</span><select data-k="${k}"><option value="" disabled ${o[k]?"":"selected"}>${ph}</option>${opts.map(v=>`<option ${o[k]===v?"selected":""}>${v}</option>`).join("")}</select></label>`; }
+
+function view(){
+  switch(step){
+    case 0: return head("Let’s start your edit.", "Takes about three minutes. Your footage can stay in Google Drive, Dropbox or WeTransfer, you just leave us the link at the end.") +
+      `<div class="grid">
+        <button class="row" data-go="new"><span class="ico">${ICONS.plus}</span><div><h3>Start a new order</h3><p>Tell us what you need, we come back within 24 hours with a flat price.</p></div><span class="arr">${ICONS.arr}</span></button>
+        ${hasDraft?`<button class="row" data-go="resume"><span class="ico">${ICONS.resume}</span><div><h3>Continue where you left off</h3><p>Your unfinished order is saved on this device.</p></div><span class="arr">${ICONS.arr}</span></button>`:""}
+        <a class="row" href="https://wa.me/${WA}?text=${encodeURIComponent("Hi Staymedia, I’d like to talk before placing an order.")}"><span class="ico">${ICONS.chat}</span><div><h3>Talk first on WhatsApp</h3><p>Not sure what you need? Send one video and we’ll tell you straight.</p></div><span class="arr">${ICONS.arr}</span></a>
+      </div>`;
+    case 1: return head("What are we editing?", "Pick the format that matches the final video. One order is one video.") +
+      `<div class="grid g3">${TYPES.map(t=>`<button class="card ${o.type===t.id?"on":""}" data-type="${t.id}"><span class="tick"></span><span class="ico">${ICONS[t.i]}</span><h3>${t.t}</h3><p>${t.d}</p></button>`).join("")}</div>`;
+    case 2: if(o.type==="thumb"||o.type==="mg") return head("No footage specs needed.", o.type==="thumb"?"Thumbnails are built from your stills or video frames, you can share them in the instructions step.":"Motion graphics are built from your brief, logo and assets. If you have footage to combine with it, mention it in the instructions step.") +
+        `<div class="note">${ICONS.warn}<span>Continue to add-ons.</span></div>`;
+      return head("Tell us about the raw footage.", "This sets the turnaround. A 48 to 72 hour first draft is standard.") +
+      sel("len","Raw footage length",LEN,"How long is the raw footage?") + sel("size","Raw footage size",SIZE,"How large is it in GB?") + sel("src","Footage source",SRC,"What was it shot on?") +
+      (bigFootage()?`<p class="hint">Footage this size usually adds about 24 hours to the first draft.</p>`:"");
+    case 3: return head("Anything extra?", "Optional. Every order already includes the essentials, add only what the video needs.") +
+      `<p class="inc"><b>Always included:</b> motion graphics, branded transitions, colour grading, licensed music, sound mix and unlimited revision rounds.</p>
+       <div class="grid g3">${ADDONS.map(a=>`<button class="card ${o.addons.includes(a.id)?"on":""}" data-addon="${a.id}"><span class="tick"></span><h3>${a.t}</h3>${a.d?`<p>${a.d}</p>`:""}</button>`).join("")}</div>`;
+    case 4: return head("The video details.", "The basics we need before we open the project.") +
+      field("title","Video title","Working title is fine") +
+      `<label class="f"><span>Niche or category</span><input type="text" list="niches" data-k="niche" value="${esc(o.niche)}" placeholder="Talking head, podcast, real estate, finance…"></label><datalist id="niches">${NICHES.map(n=>`<option value="${n}">`).join("")}</datalist>` +
+      area("desc","What is the video about?","Who it’s for, the main point, anything we should know about the audience.") +
+      `<div class="grid g2">${field("date","Publish date <small>(optional)</small>","", "date")}${sel("final","Final length",FINAL,"How long should the finished video be?")}</div>`;
+    case 5: return head("Pacing and tone.", "How the video should feel. Pick one pace and any tones that fit.") +
+      `<div class="grid g3">${PACE.map(p=>`<button class="card ${o.pace===p.id?"on":""}" data-pace="${p.id}"><span class="tick"></span><h3>${p.t}</h3><p>${p.d}</p></button>`).join("")}</div>
+       <p class="sub">Tone</p><div class="pills">${TONES.map(t=>`<button class="pill ${o.tones.includes(t)?"on":""}" data-tone="${t}">${t}</button>`).join("")}</div>
+       <p class="sub">Caption style</p><div class="pills">${CAPS.map(c=>`<button class="pill ${o.caps===c?"on":""}" data-caps="${c}">${c}</button>`).join("")}</div>`;
+    case 6: return head("How should we edit it?", "Be as specific or as loose as you like. Links to videos you admire help more than adjectives.") +
+      area("instr","Editing instructions","Hook to keep, parts to cut, pacing notes, where captions go, music mood, anything you never want to see…") +
+      area("examples","Example videos <small>(optional)</small>","One link per line, with a word on what you like about each.") +
+      `<div class="grid g2">${field("script","Script or outline link <small>(optional)</small>","Google Doc, Notion…","url")}${field("assets","Brand assets link <small>(optional)</small>","Logo, fonts, colours, intro files","url")}</div>`;
+    case 7: return head("Footage and how to reach you.", "Share the footage link and tell us where to send the quote and first draft.") +
+      (o.type==="mg"||o.type==="thumb" ? field("link","Footage or stills link <small>(optional)</small>","Google Drive, Dropbox or WeTransfer link","url") : field("link","Raw footage link","Google Drive, Dropbox or WeTransfer link, set to anyone-with-link","url")) +
+      `<div class="grid g2">${field("name","Your name","")}${field("email","Email","you@example.com","email")}</div>
+       <div class="grid g2">${field("phone","WhatsApp number <small>(optional)</small>","+1 555 000 0000","tel")}${sel("contact","Preferred contact",["WhatsApp","Email"],"")}</div>
+       <div class="note">${ICONS.warn}<span>Phone footage is fine. Keep the link live until the final file is delivered, we keep nothing afterwards and you own everything.</span></div>`;
+    case 8: return head("Review and send.", "Check the brief, then send it. We reply within 24 hours, Monday to Saturday, with a flat price and start date.") +
+      `<div class="rev">${rows().map(r=>`<div class="r"><span class="k">${r[0]}</span><span class="v">${esc(r[1])}</span><button class="e" data-edit="${r[2]}">Edit</button></div>`).join("")}</div>
+       <div class="send">
+         <a class="btn p" id="sendWa" href="#" target="_blank" rel="noopener">${ICONS.wa} Send on WhatsApp</a>
+         <a class="btn o" id="sendMail" href="#">${ICONS.mail} Send by email</a>
+         <button class="btn o" id="copyBrief">${ICONS.copy} Copy brief</button>
+       </div>`;
+  }
+}
+function rows(){
+  const r = [["Video type", label(TYPES,o.type), 1]];
+  if(!(o.type==="thumb"||o.type==="mg")) r.push(["Raw footage", `${o.len}, ${o.size}, ${o.src}${bigFootage()?" (+24h likely)":""}`, 2]);
+  r.push(["Add-ons", o.addons.length? o.addons.map(a=>label(ADDONS,a)).join(", ") : "None", 3]);
+  r.push(["Title", o.title, 4],["Niche", o.niche, 4],["About", o.desc, 4],["Final length", o.final + (o.date?`, publish ${o.date}`:""), 4]);
+  r.push(["Pace & tone", `${label(PACE,o.pace)} pace. ${o.tones.join(", ")}${o.caps?`. Captions: ${o.caps}`:""}`, 5]);
+  r.push(["Instructions", o.instr, 6]);
+  if(o.examples) r.push(["Examples", o.examples, 6]);
+  if(o.script) r.push(["Script", o.script, 6]);
+  if(o.assets) r.push(["Brand assets", o.assets, 6]);
+  r.push(["Footage link", o.link||"Not provided", 7],["Contact", `${o.name}, ${o.email}${o.phone?", "+o.phone:""}. Prefers ${o.contact}.`, 7]);
+  return r;
+}
+function brief(){ return "New Staymedia order\n\n" + rows().map(r=>`${r[0]}: ${r[1]}`).join("\n"); }
+
+function render(){
+  const m = document.getElementById("main");
+  m.innerHTML = view() + (step>0 ? `<div class="nav"><button class="btn g" id="back">${ICONS.back} Back</button>${step<8?`<button class="btn p" id="next" ${valid(step)?"":"disabled"}>Next step ${ICONS.arr}</button>`:""}</div>` : "");
+  document.getElementById("steps").innerHTML = STEPS.map((s,i)=>`<li class="${i<step?"done":i===step?"now":""}" data-step="${i}"><span class="dot">${i<step||i===0?"":i}</span>${s}</li>`).join("");
+  document.getElementById("mobCnt").textContent = step===0?"":`Step ${step} of 8`;
+  document.getElementById("mobBar").style.width = (step/8*100)+"%";
+  if(step===8){
+    const b = brief();
+    document.getElementById("sendWa").href = `https://wa.me/${WA}?text=${encodeURIComponent(b)}`;
+    document.getElementById("sendMail").href = `mailto:${MAIL}?subject=${encodeURIComponent("New order: "+o.title)}&body=${encodeURIComponent(b)}`;
+  }
+  window.scrollTo({top:0});
+  save();
+}
+function go(n){ step = Math.max(0, Math.min(8, n)); maxStep = Math.max(maxStep, step); render(); }
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"),1800); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-go],[data-type],[data-addon],[data-pace],[data-tone],[data-caps],[data-edit],[data-step],#next,#back,#copyBrief");
+  if(!t) return;
+  if(t.dataset.go==="new"){ o = blank(); maxStep = 0; go(1); }
+  else if(t.dataset.go==="resume"){ go(Math.max(1, maxStep)); }
+  else if(t.dataset.type){ o.type = t.dataset.type; render(); }
+  else if(t.dataset.addon){ const a=t.dataset.addon; o.addons = o.addons.includes(a)? o.addons.filter(x=>x!==a) : [...o.addons,a]; render(); }
+  else if(t.dataset.pace){ o.pace = t.dataset.pace; render(); }
+  else if(t.dataset.tone){ const a=t.dataset.tone; o.tones = o.tones.includes(a)? o.tones.filter(x=>x!==a) : [...o.tones,a]; render(); }
+  else if(t.dataset.caps){ o.caps = o.caps===t.dataset.caps ? "" : t.dataset.caps; render(); }
+  else if(t.dataset.edit){ go(+t.dataset.edit); }
+  else if(t.dataset.step!==undefined){ const n=+t.dataset.step; if(n<step) go(n); }
+  else if(t.id==="next"){ if(valid(step)) go(step+1); }
+  else if(t.id==="back"){ go(step-1); }
+  else if(t.id==="copyBrief"){ navigator.clipboard?.writeText(brief()).then(()=>toast("Brief copied"), ()=>toast("Copy failed, use WhatsApp or email")); }
+});
+document.addEventListener("input", e => {
+  const k = e.target.dataset.k; if(!k) return;
+  o[k] = e.target.value;
+  const n = document.getElementById("next"); if(n) n.disabled = !valid(step);
+  if(step===2){ const h=document.querySelector(".hint"); const big=bigFootage(); if(big&&!h){ [...document.querySelectorAll("#main label.f")].pop().insertAdjacentHTML("afterend",`<p class="hint">Footage this size usually adds about 24 hours to the first draft.</p>`);} else if(!big&&h){ h.remove(); } }
+  save();
+});
+render();
+</script>
+</body>
+</html>
